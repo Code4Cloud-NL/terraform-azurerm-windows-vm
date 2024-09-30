@@ -1,0 +1,111 @@
+formatter: "" # this is required
+
+version: ""
+
+header-from: main.tf
+footer-from: ""
+
+recursive:
+  enabled: false
+  path: modules
+
+sections:
+  hide: []
+  show: []
+
+content: |-
+  # Azure Windows Virtual Machine (VM) module
+
+  This module simplifies the creation of one or more Windows virtual machines (VM) in Azure. It is designed to be flexible, modular, and easy to use, ensuring a seamless and secure VM deployment experience.
+
+  # Features
+
+  Creates one or more Windows VM in Azure with the following (optional) features:
+
+  - The option to add the VM to a new availability set (created from within this module) using the 'var.availability_set.enabled' variable.
+  - The option to configure the (optional) availability set using the 'var.availability_set' variable.
+  - The option to install the Azure Monitor Agent via the 'var.azure_monitor_agent' variable.
+  - The option to connect the Azure Monitor Agent to an existing log analytic workspace via the 'var.azure_monitor_agent.audit' variable.
+  - The option to change the source image reference using the 'var.source_image_reference' variable (defaults to Windows Server 2022 Datacenter Azure Edition).
+  - The option to change VM specific configuration using the 'var.virtual_machines' variable.
+  - The option to add one or more data disks to each separate VM using the option: data_disks.
+  - The option to join the VM to an Active Directory (AD) domain using the 'var.ad_domain_join' and 'var.ad_domain_join_account' variables.
+
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Resources }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  ## Example(s)
+
+  ### 1 VM with basic configuration
+  ```hcl
+  {{ include ".examples/vm_example_basic.tf"}}
+  ```
+
+   ### 1 VM with joined to an active directory domain
+  ```hcl
+  {{ include ".examples/vm_example_ad_domain_join.tf"}}
+  ```
+
+  ### 2 VM within an availability set
+
+  ```hcl
+  {{ include ".examples/vm_example_with_availability_set.tf"}}
+  ```
+
+  ### 1 VM with datadisks
+
+  ```hcl
+  {{ include ".examples/vm_example_with_data_disks.tf"}}
+  ```
+
+  ### 1 VM with Azure Monitor Agent enabled
+
+  ```hcl
+  {{ include ".examples/vm_example_with_azure_monitor_agent.tf"}}
+  ```
+
+  # Known issues and limitations
+
+  No known issues or limitations.
+
+  # Author
+
+  Stefan Vonk (vonk.stefan@live.nl) Technical Specialist
+
+output:
+  file: ""
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: false
+  html: true
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
